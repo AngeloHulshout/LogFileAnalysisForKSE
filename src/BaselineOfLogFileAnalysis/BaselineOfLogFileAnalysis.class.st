@@ -1,6 +1,6 @@
 Class {
 	#name : #BaselineOfLogFileAnalysis,
-	#superclass : #Object,
+	#superclass : #BaselineOf,
 	#category : #BaselineOfLogFileAnalysis
 }
 
