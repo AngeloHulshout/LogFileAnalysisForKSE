@@ -12,7 +12,7 @@ Class {
 LogFileAnalysis >> calculateProportioningTimes: for [
 	"Calculate proportioning times for order(s) containing given string 'for' in the Batch Nm"
 	| props size times |
-	props := log_coll select: [:each| (each at: 1) = ' Create Proportioning ' and: [(each at: 5) value includesSubstring: for]].
+	props := self proportioningEntries:for.
 	size := props size.
 	times := OrderedCollection new.
 	2 to: size do:
@@ -57,4 +57,12 @@ LogFileAnalysis >> parse [
 	log_coll := log parse: string.
 
 
+]
+
+{ #category : #accessing }
+LogFileAnalysis >> proportioningEntries: for [ 
+	"Return list of proportioning entries for order(s) containgin given string 'for' in the Batch Nm"
+	| props |
+	props := log_coll select: [:each| (each at: 1) = ' Create Proportioning ' and: [(each at: 5) value includesSubstring: for]].
+	^ props
 ]
