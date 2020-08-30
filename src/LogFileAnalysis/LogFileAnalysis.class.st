@@ -9,6 +9,18 @@ Class {
 }
 
 { #category : #accessing }
+LogFileAnalysis >> calculateProportioningTimes: for [
+	"Calculate proportioning times for order(s) containing given string 'for' in the Batch Nm"
+	| props size times |
+	props := log_coll select: [:each| (each at: 1) = ' Create Proportioning ' and: [(each at: 5) value includesSubstring: for]].
+	size := props size.
+	times := OrderedCollection new.
+	2 to: size do:
+		[:counter | times add: ((props at: counter) at: 2) - ((props at: counter - 1) at:2).].
+	^ times
+]
+
+{ #category : #accessing }
 LogFileAnalysis >> filename: nm [
 	"Set filename for logfile to analyse"
 	fileName := nm
@@ -16,6 +28,7 @@ LogFileAnalysis >> filename: nm [
 
 { #category : #accessing }
 LogFileAnalysis >> parse [
+	"Parse log file to OrderedCollection of entries"
 	| string year month day hour minute second date time dateAndTime channel begin end pair entry log |
 	string := fileName asFileReference contents.
 	year := (#digit asPParser times: 4) flatten ==> #asNumber.
