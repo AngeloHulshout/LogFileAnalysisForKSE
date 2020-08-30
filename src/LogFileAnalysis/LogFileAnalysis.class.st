@@ -9,6 +9,12 @@ Class {
 }
 
 { #category : #accessing }
+LogFileAnalysis >> filename: nm [
+	"Set filename for logfile to analyse"
+	fileName := nm
+]
+
+{ #category : #accessing }
 LogFileAnalysis >> parse [
 	| string year month day hour minute second date time dateAndTime channel begin end pair entry log |
 	string := fileName asFileReference contents.
