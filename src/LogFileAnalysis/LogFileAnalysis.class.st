@@ -27,6 +27,18 @@ LogFileAnalysis >> filename: nm [
 ]
 
 { #category : #accessing }
+LogFileAnalysis >> getProportionedBL01Orders [
+	"Get unique Batch Nm for BL01"
+	| s props size |
+	s := Set new.
+	props := self proportioningEntries: 'BL01'.
+	size := props size.
+	1 to: size do:
+		[:counter | s add: ((props at: counter) at: 5)].
+	^ s
+]
+
+{ #category : #accessing }
 LogFileAnalysis >> parse [
 	"Parse log file to OrderedCollection of entries"
 	| string year month day hour minute second date time dateAndTime channel begin end pair entry log |
