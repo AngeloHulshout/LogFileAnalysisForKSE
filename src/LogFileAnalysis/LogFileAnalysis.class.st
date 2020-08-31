@@ -34,7 +34,7 @@ LogFileAnalysis >> getProportionedBL01Orders [
 	props := self proportioningEntries: 'BL01'.
 	size := props size.
 	1 to: size do:
-		[:counter | s add: ((props at: counter) at: 5)].
+		[:counter | s add: ((((props at: counter) at: 5) value) truncateTo: 7)].
 	^ s
 ]
 
