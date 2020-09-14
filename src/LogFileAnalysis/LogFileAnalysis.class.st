@@ -78,3 +78,22 @@ LogFileAnalysis >> proportioningEntries: for [
 	props := log_coll select: [:each| (each at: 1) = ' Create Proportioning ' and: [(each at: 5) value includesSubstring: for]].
 	^ props
 ]
+
+{ #category : #accessing }
+LogFileAnalysis >> registerRRCEntries: for [
+	"Return list of arrivals of RRCs on P&M"
+	| props pmprops |
+	pmprops := log_coll select: [:each| (each at: 1) = ' Reg Bin Position ' and: [(each at: 4) value includesSubstring: 'PickAndMix' ]].
+	props := pmprops select: [:each| (each at: 6) value includesSubstring: for].
+	^ props
+]
+
+{ #category : #accessing }
+LogFileAnalysis >> requestRRCEntries: for [
+	"Return list of entries for request and arrival of RRC, for BL01"
+	| props searchstring |
+	searchstring := for.
+	searchstring become: searchstring, ';10;PANTRY;PM-IN'.
+	props := log_coll select: [:each| (each at: 1) = ' Send Component Trigger ' and: [(each at: 7) value includesSubstring: searchstring]].
+	^ props
+]
